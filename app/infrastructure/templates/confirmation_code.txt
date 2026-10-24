@@ -1,0 +1,12 @@
+$heading
+
+$intro
+
+    $code
+
+The code works for $minutes_text.
+
+$outro
+
+-- 
+$site_name · $site_url

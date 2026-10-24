@@ -1,0 +1,39 @@
+[project]
+name = "balatro-notification-service"
+version = "0.1.0"
+description = "Sends Balatro's emails (confirmation codes) from the other services' RabbitMQ messages"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aio-pika>=10.1.0",
+    "fastapi>=0.141.1",
+    "pydantic[email]>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "uvicorn>=0.53.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.16",
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "ruff>=0.16.8",
+]
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "BLE", "TRY004"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+files = ["app", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["rabbitmq: needs a RabbitMQ (RABBITMQ_TEST_URL); skipped without one"]
